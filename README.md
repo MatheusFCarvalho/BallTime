@@ -1,8 +1,3 @@
-Seja muito bem vindo aos meus estudos!
-Vou disponibilizar aqui os comandos acessaveis somente pelo console!
-se tem duvidas sobre como acessar o console é apenas pressionar 'ctrl + shift + j' quando estiver na pagina index.html, la voce podera escrever os seguintes...
-    COMANDOS:
-coffeMode()
-cannabisMode()
-
-tendeu?
+Seja muito bem vindo aqui nas bóinha quicando!
+Espero que tu consiga gastar algum tempinho entretido nos poderes infinitos, caso queira me dar alguma ideia de função nova ou relatar algum bug, meu email:Matheus.fcarvalho2001@gmail.com 
+meu linkedin: https://www.linkedin.com/in/matheus-carvalho-9437a120b
