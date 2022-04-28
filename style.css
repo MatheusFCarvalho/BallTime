@@ -10,6 +10,7 @@ html, body {
   body {
     overflow: hidden;
     height: inherit;
+
   }
   p {
     font-size: 2rem;
@@ -47,6 +48,16 @@ html, body {
   #thanosButton:hover {
     color: blueviolet;
     text-shadow: 0 0 24px blueviolet;
+  }
+  #coffeButton:hover {
+    color: rgb(90, 74, 23);
+    text-shadow: 0 0 24px rgb(90, 74, 23);
+  }
+  #cannabisButton:hover {
+    background: linear-gradient(90deg,#f00,#ff0,#0f0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
   }
   #bananaButton:hover {
     color:yellow;
