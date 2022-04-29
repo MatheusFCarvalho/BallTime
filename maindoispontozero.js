@@ -28,6 +28,8 @@ class Ball{
         this.color = color;
         this.size = size;
         this.colisions = 0
+        this.borda = random(0,1)
+
     }
 
     bananaDraw(){
@@ -39,9 +41,15 @@ class Ball{
 
       draw(){
         ctx.beginPath();
+
+        if(this.borda){
+          ctx.strokeStyle = this.color
+          ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
+          ctx.stroke()  
+        }else{
         ctx.fillStyle = this.color;
         ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
-        ctx.fill();
+        ctx.fill();}
       }
 
       update(){
@@ -91,6 +99,25 @@ class Ball{
       }
 }
 
+class Square extends Ball{
+  constructor(x, y, velX, velY, color, size){
+    super(x, y, velX, velY, color, size)
+  }
+
+  draw(){
+    ctx.beginPath();
+    if(this.borda){
+    ctx.strokeStyle = this.color
+    ctx.fillRect(this.x, this.y, this.size, this.size, this.color)
+  } else{
+    ctx.fillStyle = this.color
+    ctx.strokeRect(this.x, this.y, this.size, this.size, this.color)
+  }
+    
+    ctx.fill();
+
+  }
+}
 
 
   function mudaRotaMudaCor(ball1,ball2){
@@ -118,11 +145,12 @@ class Ball{
 
   let balls = [];
 while (balls.length < 5) {
-  addBola()
+  addQuicker(Square)
+  addQuicker()
 }
 
 function loop() {
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.09)';//0,09
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.12)';//0,09
     ctx.fillRect(0, 0, width, height);
   
     for (let i = 0; i < balls.length; i++) {

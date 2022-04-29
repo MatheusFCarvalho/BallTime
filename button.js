@@ -1,10 +1,16 @@
 const qtdBall = document.getElementById('qtdBall')
 const butao = document.getElementById('addBall')
-butao.addEventListener('click',addBola)
+const butao2 = document.getElementById('addSquare')
+butao.addEventListener('click',addQuicker)
+butao2.addEventListener('click',addQuicker)
 
-function addBola(){
+
+function addQuicker(type = Ball){
+    let tipo;
+    if(event){tipo = eval(event.target.className)}
+    else{tipo = type}
     let size = random(10,20);
-    let ball = new Ball(
+    let ball = new tipo(
       // ball position always drawn at least one ball width
       // away from the edge of the canvas, to avoid drawing errors
       random(0 + size,width - size),
