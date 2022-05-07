@@ -29,7 +29,10 @@ class Ball{
         this.size = size;
         this.colisions = 0
         this.borda = random(0,1)
+        this.zeroOuUm = random(0,1)
+    }
 
+    multiply(b1,b2){
     }
 
     bananaDraw(){
@@ -41,15 +44,11 @@ class Ball{
 
       draw(){
         ctx.beginPath();
-
-        if(this.borda){
-          ctx.strokeStyle = this.color
-          ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
-          ctx.stroke()  
-        }else{
+        ctx.strokeStyle = this.color
         ctx.fillStyle = this.color;
         ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
-        ctx.fill();}
+
+        if(this.borda){ctx.stroke()}else{ctx.fill();}
       }
 
       update(){
@@ -98,7 +97,6 @@ class Ball{
         }
       }
 }
-
 class Square extends Ball{
   constructor(x, y, velX, velY, color, size){
     super(x, y, velX, velY, color, size)
@@ -106,24 +104,52 @@ class Square extends Ball{
 
   draw(){
     ctx.beginPath();
-    if(this.borda){
     ctx.strokeStyle = this.color
-    ctx.fillRect(this.x, this.y, this.size, this.size, this.color)
-  } else{
     ctx.fillStyle = this.color
-    ctx.strokeRect(this.x, this.y, this.size, this.size, this.color)
-  }
-    
+    if(this.borda){
+      ctx.strokeRect(this.x, this.y, this.size, this.size, this.color)
+    } else{
+    ctx.fillRect(this.x, this.y, this.size, this.size, this.color)
+  }    
     ctx.fill();
-
   }
+}
+class Hackier extends Ball{
+  constructor(x, y, velX, velY, color, size){
+    super(x, y, velX, velY, color, size)
+  }
+
+  draw(){
+    ctx.beginPath()
+    ctx.fillStyle = 'rgb(0,255,0)'
+    ctx.font = `bold ${this.size*2}px serif`
+    if(this.zeroOuUm==0){ctx.fillText('0',this.x,this.y)}else{
+    ctx.fillText('1',this.x,this.y)}
+  }
+  collisionDetect(){
+    for (let j = 0; j < balls.length; j++) {
+      if (!(this === balls[j])) {
+        const dx = this.x - balls[j].x;
+        const dy = this.y - balls[j].y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+  
+        if (distance < this.size + balls[j].size) {
+
+          ballHacked(balls[j])
+          mudaRotaMudaCor(balls[j],this)
+          colisioned()
+          addBallColisionCounter(this,balls[j])
+        }
+      }
+    }
+  }
+
 }
 
 
   function mudaRotaMudaCor(ball1,ball2){
       if(!isCannabied){
         changeColor(ball1,ball2)
-
 
         ball1.velX = -(ball1.velX)
         ball2.velX = -(ball2.velX)
@@ -136,9 +162,7 @@ class Square extends Ball{
         ball2.y += 2*ball2.velY
       }else{
             cannabisRota(ball1,ball2)
-            console.log(ball1,ball2)
     }
-
   }
 
 
@@ -148,24 +172,24 @@ while (balls.length < 5) {
   addQuicker(Square)
   addQuicker()
 }
-
 function loop() {
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.12)';//0,09
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.275)';//0,09
     ctx.fillRect(0, 0, width, height);
   
-    for (let i = 0; i < balls.length; i++) {
-        if(isBananed){
-            balls[i].bananaDraw()
-        }else{balls[i].draw();}
 
-        if(!isGhosted){
-            balls[i].collisionDetect()
-        }
-
-      balls[i].update();
-    }
+    balls.forEach(ball=>{
+      
+      if(isBananed){
+          ball.bananaDraw()
+      }else{ball.draw();}
   
+      if(!isGhosted){
+          ball.collisionDetect()
+      }
+  
+    ball.update();
+    })
+      
     requestAnimationFrame(loop);
   }
-
   loop()
