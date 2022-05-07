@@ -41,9 +41,12 @@ html, body {
     top: 0px;
     right: 0px;
   }
+  #addSquare {
+    right:80px
+  }
   #changeColor {
     top: 0px;
-    right: 120px;
+    right: 200px;
   }
   #thanosButton:hover {
     color: blueviolet;
