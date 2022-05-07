@@ -7,12 +7,12 @@ butao2.addEventListener('click',addQuicker)
 
 function addQuicker(type = Ball){
     let tipo;
-    if(event){tipo = eval(event.target.className)}
-    else{tipo = type}
+    if(type!=Hackier){
+        if(event){tipo = eval(event.target.className)
+        }else{tipo = type}
+}else{tipo = type}
     let size = random(10,20);
     let ball = new tipo(
-      // ball position always drawn at least one ball width
-      // away from the edge of the canvas, to avoid drawing errors
       random(0 + size,width - size),
       random(0 + size,height - size),
       random(1,8),
@@ -162,8 +162,51 @@ function cannabisRota(b1,b2){
     }
 }
 
+let isHackied = false
+const hackerButton = document.getElementById('hackerButton')
+hackerButton.addEventListener('click',hackerBallAdd)
+function hackerBallAdd(){
+    isHackied = true
+    // balls.forEach(b=>{
+    //     b.color = `rgb(0,255,0)`
+    //     b.borda = true
+    // })
+    addQuicker(Hackier)
+
+}
+
+
+function ballHacked(ball){
+    if(!ball.hackedLevel){ball.hackedLevel = 0}
+    ball.hackedLevel++
+    console.log(ball.hackedLevel)
+    if(ball.hackedLevel == 1){
+        ball.color = 'rgb(0,255,0)'
+        ball.borda = true
+    }else if(ball.hackedLevel == 2){
+        turnToHacked(ball)
+    }
+}
+function turnToHacked(ball){
+    let ballHack = new Hackier(
+        ball.x,
+        ball.y,
+        random(1,8),
+        random(1,8),
+        'rgb(0,255,0)',
+        ball.size+(1.2)
+      )
+    if(isGhosted){ball.color = ghostCor(ball.color)}
+
+    balls = balls.filter(b=>{return b !=ball})
+
+    qtdBall.innerText = balls.length
+    balls.push(ballHack)
+}
+
+
 function changeColor(b1,b2){
-    if(!isBananed){
+    if(!isBananed && !isHackied){
         b1.color = b2.color = 'rgb(' + random(0, 255) + ',' + random(0, 255) + ',' + random(0, 255) +')';
   }
 }
